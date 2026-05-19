@@ -1,0 +1,52 @@
+Computer Science
+    Programming
+    Data Structures
+    Algorithms
+    Databases
+    Computer Networks
+    Cyber Security
+    Artificial Intelligence
+
+Programming
+    Python
+    Java
+    C++
+    JavaScript
+
+Data Structures
+    Arrays
+    Linked Lists
+    Stacks
+    Queues
+    Trees
+    Graphs
+
+Algorithms
+    Searching
+    Sorting
+    Recursion
+    Dynamic Programming
+
+Databases
+    SQL
+    NoSQL
+    Normalisation
+    Queries
+
+Computer Networks
+    Internet
+    IP Addressing
+    DNS
+    Protocols
+
+Cyber Security
+    Encryption
+    Firewalls
+    Authentication
+    Malware
+
+Artificial Intelligence
+    Machine Learning
+    Neural Networks
+    Natural Language Processing
+    Computer Vision
