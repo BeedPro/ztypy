@@ -33,6 +33,12 @@ class SlipifyTests(unittest.TestCase):
             self.assertIn("#let title =", content)
             self.assertIn("= Links", content)
 
+            slip_layout = temp_path / "layout.slip.txt"
+            self.assertTrue(slip_layout.exists())
+            slip_content = slip_layout.read_text(encoding="utf-8")
+            self.assertIn(".typ", slip_content)
+            self.assertIn("    ", slip_content)
+
 
 if __name__ == "__main__":
     unittest.main()

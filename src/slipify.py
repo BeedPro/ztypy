@@ -95,6 +95,26 @@ def phase_3_add_links(
         file_path.write_text(content, encoding="utf-8")
 
 
+def build_slip_layout_text(
+    adjacency: Dict[str, List[str]], notes: Dict[str, Note]
+) -> str:
+    lines: List[str] = []
+
+    for parent_title in sorted(adjacency):
+        parent_name = f"{notes[parent_title].note_id}.typ"
+        lines.append(parent_name)
+
+        child_names = sorted(
+            {f"{notes[child].note_id}.typ" for child in adjacency[parent_title]}
+        )
+        for child_name in child_names:
+            lines.append(f"    {child_name}")
+
+        lines.append("")
+
+    return "\n".join(lines).rstrip() + "\n"
+
+
 def run(layout_file: str, output_dir: str = "output") -> Path:
     layout_path = Path(layout_file).resolve()
     if not layout_path.exists() or not layout_path.is_file():
@@ -109,7 +129,12 @@ def run(layout_file: str, output_dir: str = "output") -> Path:
     phase_2_add_titles(target_dir, notes)
     phase_3_add_links(target_dir, notes, adjacency)
 
+    slip_layout_path = layout_path.with_name(f"{layout_path.stem}.slip.txt")
+    slip_layout_text = build_slip_layout_text(adjacency, notes)
+    slip_layout_path.write_text(slip_layout_text, encoding="utf-8")
+
     print(f"Generated {len(notes)} files in {target_dir}")
+    print(f"Wrote slip layout to {slip_layout_path}")
     return target_dir
 
 
