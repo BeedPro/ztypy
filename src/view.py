@@ -1,25 +1,18 @@
-#!/usr/bin/env python3
-
 from __future__ import annotations
 
 import argparse
 import html
 import json
 import webbrowser
-from pathlib import Path
-from typing import Dict, List, Set, Tuple
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
 from tempfile import TemporaryDirectory
+from typing import List, Set, Tuple
 
 
 def parse_adjacency_layout(
     layout_path: Path,
 ) -> Tuple[List[str], List[Tuple[str, str]]]:
-    """
-    Parse adjacency-list text:
-    - Non-indented lines are parent node titles
-    - Indented lines beneath are children
-    """
     nodes: Set[str] = set()
     edges: Set[Tuple[str, str]] = set()
     current_parent: str | None = None
@@ -70,7 +63,7 @@ def build_html(
       min-height: 100vh;
       background: radial-gradient(circle at 10% 10%, #e8f2ff 0%, var(--bg) 45%, #edf3f9 100%);
       color: var(--text);
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: Georgia, \"Times New Roman\", serif;
       display: grid;
       grid-template-rows: auto 1fr;
     }}
@@ -135,8 +128,7 @@ def build_html(
 
 def serve_html(html_content: str, port: int, open_browser: bool) -> None:
     with TemporaryDirectory(prefix="slipbox-graph-") as temp_dir:
-        temp_path = Path(temp_dir)
-        index_path = temp_path / "index.html"
+        index_path = Path(temp_dir) / "index.html"
         index_path.write_text(html_content, encoding="utf-8")
 
         class Handler(SimpleHTTPRequestHandler):
@@ -159,33 +151,27 @@ def serve_html(html_content: str, port: int, open_browser: bool) -> None:
             server.server_close()
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="Visualize an adjacency-list text file as an interactive HTML graph."
-    )
-    parser.add_argument("txt_file", help="Path to adjacency-list .txt file")
-    parser.add_argument(
-        "--port",
-        type=int,
-        default=8000,
-        help="Port for local server (default: 8000)",
-    )
-    parser.add_argument(
-        "--no-open",
-        action="store_true",
-        help="Do not auto-open browser",
-    )
-    args = parser.parse_args()
-
-    txt_path = Path(args.txt_file).resolve()
+def run(txt_file: str, port: int = 8000, no_open: bool = False) -> None:
+    txt_path = Path(txt_file).resolve()
     if not txt_path.exists() or not txt_path.is_file():
         raise FileNotFoundError(f"Text file not found: {txt_path}")
 
     node_titles, edges = parse_adjacency_layout(txt_path)
     page_title = f"Graph View: {txt_path.name}"
     html_content = build_html(page_title, node_titles, edges)
-    serve_html(html_content, port=args.port, open_browser=not args.no_open)
+    serve_html(html_content, port=port, open_browser=not no_open)
 
 
-if __name__ == "__main__":
-    main()
+def add_subparser(
+    subparsers: argparse._SubParsersAction[argparse.ArgumentParser],
+) -> None:
+    parser = subparsers.add_parser(
+        "view",
+        help="Visualize adjacency txt as an interactive graph",
+    )
+    parser.add_argument("txt_file", help="Path to adjacency-list .txt file")
+    parser.add_argument("--port", type=int, default=8000, help="Port for local server")
+    parser.add_argument(
+        "--no-open", action="store_true", help="Do not auto-open browser"
+    )
+    parser.set_defaults(func=lambda args: run(args.txt_file, args.port, args.no_open))

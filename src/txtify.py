@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 from __future__ import annotations
 
 import argparse
@@ -101,14 +99,8 @@ def build_adjacency_text(nodes: Dict[str, Node]) -> str:
     return "\n\n".join(blocks) + "\n"
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="Generate adjacency list output.txt from Typst notes directory."
-    )
-    parser.add_argument("directory", help="Directory containing .typ files")
-    args = parser.parse_args()
-
-    typ_dir = Path(args.directory).resolve()
+def run(directory: str) -> Path:
+    typ_dir = Path(directory).resolve()
     if not typ_dir.exists() or not typ_dir.is_dir():
         raise FileNotFoundError(f"Directory not found: {typ_dir}")
 
@@ -118,7 +110,14 @@ def main() -> None:
     output_path = typ_dir / "output.txt"
     output_path.write_text(adjacency_text, encoding="utf-8")
     print(f"Wrote adjacency list to {output_path}")
+    return output_path
 
 
-if __name__ == "__main__":
-    main()
+def add_subparser(
+    subparsers: argparse._SubParsersAction[argparse.ArgumentParser],
+) -> None:
+    parser = subparsers.add_parser(
+        "txtify", help="Generate output.txt from Typst notes"
+    )
+    parser.add_argument("directory", help="Directory containing .typ files")
+    parser.set_defaults(func=lambda args: run(args.directory))
