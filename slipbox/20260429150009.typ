@@ -7,7 +7,7 @@
 #id:haskell:functional:patterns:
 
 = #title
-Visual memory hook for @01-9.
+Visual memory hook for @01-9[p.~28].
 
 #figure(
   image(".attachments/20260429150009-1.jpg", width: 70%),

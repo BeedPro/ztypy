@@ -7,7 +7,7 @@
 #id:cs:theory:automata:
 
 = #title
-Quick reminder from @01-2:
+Quick reminder from @01-2[p.~19]:
 
 $ L = { a^n b^n | n >= 0 } $ is context-free but not regular.
 

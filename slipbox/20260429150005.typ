@@ -7,7 +7,7 @@
 #id:os:scheduling:math:
 
 = #title
-From @01-4 and @01-5.
+From @01-4[p.~42] and @01-5[p.~12].
 
 Utilization bound reminder for RM scheduling:
 $ U <= n(2^(1 / n)-1) $.

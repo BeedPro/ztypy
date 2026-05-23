@@ -7,7 +7,7 @@
 #id:cs:math:analysis:
 
 = #title
-This note sketches runtime intuition from @01-1.
+This note sketches runtime intuition from @01-1[p.~37].
 
 For a geometric series with ratio $r$, we use
 $ S_n = (1-r^(n+1)) / (1-r). $

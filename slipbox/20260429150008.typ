@@ -7,7 +7,7 @@
 #id:scala:pl:types:
 
 = #title
-Inspired by @01-8.
+Inspired by @01-8[p.~63].
 
 Identity function shape:
 $ id(x) = x $ and principal type $forall a. a -> a$.

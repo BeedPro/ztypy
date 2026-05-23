@@ -7,7 +7,7 @@
 #id:pl:summary:exam:
 
 = #title
-High-level recap based on @01-10.
+High-level recap based on @01-10[p.~75].
 
 Semantic equivalence hint:
 $ e_1 ~= e_2 $ when both reduce to the same value under all environments.

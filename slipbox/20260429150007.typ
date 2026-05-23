@@ -7,7 +7,7 @@
 #id:cpp:language:notes:
 
 = #title
-Cross-check with @01-6 and @01-7.
+Cross-check with @01-6[p.~91] and @01-7[p.~14].
 
 Move semantics goal:
 $ "cost"("move") << "cost"("copy") $ for resource-owning types.

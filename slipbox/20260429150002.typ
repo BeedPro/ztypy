@@ -7,7 +7,7 @@
 #id:cs:math:recurrence:
 
 = #title
-Master theorem reminders inspired by @01-1.
+Master theorem reminders inspired by @01-1[p.~84].
 
 $ T(n) = a T(n / b) + f(n) $
 

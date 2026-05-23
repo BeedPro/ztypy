@@ -7,7 +7,7 @@
 #id:networking:performance:
 
 = #title
-Motivated by @01-3.
+Motivated by @01-3[p.~56].
 
 Approximation:
 $ "throughput" approx "cwnd" / "rtt" $.

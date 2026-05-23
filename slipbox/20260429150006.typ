@@ -7,7 +7,7 @@
 #id:os:memory:visual:
 
 = #title
-Latency gaps matter when applying ideas from @01-5.
+Latency gaps matter when applying ideas from @01-5[p.~23].
 
 #figure(
   image(".attachments/20260429150006-1.jpg", width: 85%),
